@@ -1,0 +1,27 @@
+{
+  "model_file": "models/crop_yield_prediction_model.pkl",
+  "model_type": "RandomForestRegressor inside a scikit-learn Pipeline",
+  "target": "Yield",
+  "features": [
+    "Year",
+    "State",
+    "Crop",
+    "Season",
+    "Area",
+    "Annual_Rainfall",
+    "Fertilizer",
+    "Pesticide",
+    "Rainfall_per_Area",
+    "Fertilizer_per_Area",
+    "Pesticide_per_Area",
+    "Year_Index"
+  ],
+  "categorical_features": [
+    "State",
+    "Crop",
+    "Season"
+  ],
+  "source_dataset": "dhyann2815/india-crop-yield-prediction",
+  "production_calculation": "predicted_yield * area",
+  "note": "Production is not a model input to avoid target leakage."
+}
