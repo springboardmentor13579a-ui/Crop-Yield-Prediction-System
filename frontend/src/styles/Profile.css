@@ -1,0 +1,417 @@
+.profile-page{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+/* ================= COVER ================= */
+
+.profile-cover{
+
+    background:linear-gradient(135deg,#166534,#22c55e);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:24px;
+
+    color:white;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+.admin-cover{
+
+    background:linear-gradient(135deg,#1e293b,#334155);
+
+}
+
+.profile-avatar{
+
+    width:110px;
+
+    height:110px;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#16a34a;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:60px;
+
+    flex-shrink:0;
+
+}
+
+.admin-cover .profile-avatar{
+
+    color:#334155;
+
+}
+
+.profile-details{
+
+    flex:1;
+
+}
+
+.profile-details h1{
+
+    margin:0;
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.profile-details p{
+
+    margin-top:10px;
+
+    color:rgba(255,255,255,.9);
+
+    font-size:15px;
+
+}
+
+.role-badge{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    background:rgba(255,255,255,.2);
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.role-badge.admin{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.edit-btn{
+
+    border:none;
+
+    background:white;
+
+    color:#166534;
+
+    padding:14px 24px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.edit-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.12);
+
+}
+
+/* ================= GRID ================= */
+
+.profile-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:24px;
+
+}
+
+/* ================= CARDS ================= */
+
+.profile-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+
+}
+
+.profile-card h2{
+
+    margin-bottom:22px;
+
+    color:#166534;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+/* ================= INFO ROW ================= */
+
+.info-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid #eef2f7;
+
+    color:#334155;
+
+    font-size:15px;
+
+}
+
+.info-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.info-row svg{
+
+    color:#16a34a;
+
+    font-size:18px;
+
+    min-width:20px;
+
+}
+
+/* ================= STATS ================= */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+}
+
+.stat-item{
+
+    background:#f6fff8;
+
+    border:1px solid #dcfce7;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.stat-item:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.stat-item svg{
+
+    font-size:28px;
+
+    color:#16a34a;
+
+    margin-bottom:10px;
+
+}
+
+.stat-item h3{
+
+    margin:0;
+
+    font-size:28px;
+
+    color:#166534;
+
+}
+
+.stat-item p{
+
+    margin-top:6px;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+/* ================= ACTIVITY ================= */
+
+.activity{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:0;
+
+}
+
+.activity li{
+
+    padding:14px 0;
+
+    border-bottom:1px solid #eef2f7;
+
+    color:#334155;
+
+    font-size:15px;
+
+    position:relative;
+
+}
+
+.activity li:last-child{
+
+    border-bottom:none;
+
+}
+
+/* ================= FARM INFO STYLE ================= */
+
+.profile-card .info-row span{
+
+    font-weight:500;
+
+}
+
+/* ================= HOVER ================= */
+
+.profile-card{
+
+    transition:.3s;
+
+}
+
+.profile-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
+
+.profile-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.profile-cover{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.edit-btn{
+
+    margin-top:15px;
+
+}
+
+.profile-avatar{
+
+    width:90px;
+
+    height:90px;
+
+    font-size:50px;
+
+}
+
+.profile-details h1{
+
+    font-size:28px;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.profile-card{
+
+    padding:20px;
+
+}
+
+.profile-cover{
+
+    padding:25px;
+
+}
+
+.profile-details h1{
+
+    font-size:24px;
+
+}
+
+}

@@ -1,0 +1,491 @@
+/* ================= PAGE ================= */
+
+.prediction-page {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+
+/* ================= HEADER ================= */
+
+.prediction-header {
+    background: linear-gradient(135deg, #166534, #22c55e);
+    color: #fff;
+    padding: 35px 40px;
+    border-radius: 22px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.prediction-header h1 {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.prediction-header p {
+    opacity: 0.9;
+    font-size: 16px;
+}
+
+
+/* ================= GRID ================= */
+
+.prediction-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+
+/* ================= LEFT CARD ================= */
+
+.prediction-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.prediction-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #166534;
+    margin-bottom: 25px;
+}
+
+
+/* ================= FORM ================= */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 8px;
+    color: #14532d;
+    font-weight: 600;
+}
+
+
+/* ================= INPUT + SELECT ================= */
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+
+    background: #f8faf8;
+
+    outline: none;
+
+    transition: 0.3s;
+
+    font-size: 15px;
+    font-family: inherit;
+
+    color: #1f2937;
+}
+
+
+/* INPUT FOCUS */
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #16a34a;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 0 4px rgba(22, 163, 74, 0.15);
+}
+
+
+/* SELECT */
+
+.input-group select {
+    cursor: pointer;
+    appearance: auto;
+}
+
+
+/* ================= BUTTON ================= */
+
+.predict-btn {
+    margin-top: 30px;
+
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #16a34a,
+        #22c55e
+    );
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    transition: 0.3s;
+}
+
+.predict-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 30px rgba(22, 163, 74, 0.3);
+}
+
+.predict-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* ================= RIGHT PANEL ================= */
+
+.prediction-result {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #166534;
+}
+
+.ai-badge {
+    background: #16a34a;
+
+    color: #fff;
+
+    padding: 8px 15px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+/* ================= RESULT CARD ================= */
+
+.yield-card {
+    background: linear-gradient(
+        135deg,
+        #166534,
+        #22c55e
+    );
+
+    color: white;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(22, 163, 74, 0.25);
+}
+
+.yield-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.yield-card h1 {
+    font-size: 52px;
+    margin: 10px 0;
+}
+
+.yield-card span {
+    font-size: 17px;
+    opacity: 0.95;
+}
+
+.yield-card h3 {
+    margin-top: 15px;
+}
+
+
+/* ================= PROGRESS ================= */
+
+.progress {
+    width: 100%;
+    height: 10px;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    border-radius: 20px;
+
+    margin-top: 20px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 92%;
+    height: 100%;
+
+    background: #fff;
+
+    border-radius: 20px;
+}
+
+
+/* ================= INFO CARDS ================= */
+
+.info-card {
+    background: #fff;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.info-card h3 {
+    color: #166534;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+}
+
+.info-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row span {
+    color: #64748b;
+}
+
+.info-row b {
+    color: #166534;
+}
+
+
+/* ================= RECOMMENDATION ================= */
+
+.recommend-list {
+    list-style: none;
+    padding: 0;
+}
+
+.recommend-list li {
+    padding: 10px 0;
+
+    color: #374151;
+
+    border-bottom: 1px solid #eee;
+}
+
+.recommend-list li:last-child {
+    border-bottom: none;
+}
+
+
+/* ================= EMPTY ================= */
+
+.empty-result {
+    background: #fff;
+
+    border-radius: 20px;
+
+    padding: 50px 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.empty-icon {
+    font-size: 70px;
+
+    color: #16a34a;
+
+    margin-bottom: 20px;
+}
+
+.empty-result h2 {
+    color: #166534;
+    margin-bottom: 10px;
+}
+
+.empty-result p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* ================= LOADING ================= */
+
+.loading-box {
+    background: #fff;
+
+    border-radius: 20px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.loading-icon {
+    font-size: 60px;
+
+    color: #16a34a;
+
+    animation:
+        rotate 2s linear infinite;
+}
+
+.loader {
+    width: 100%;
+
+    height: 8px;
+
+    background: #e5e7eb;
+
+    border-radius: 20px;
+
+    margin: 25px 0;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+.loader::before {
+    content: "";
+
+    position: absolute;
+
+    left: -40%;
+
+    width: 40%;
+
+    height: 100%;
+
+    background: #16a34a;
+
+    animation:
+        loading 1.2s infinite;
+}
+
+.loading-box p {
+    margin: 8px 0;
+    color: #64748b;
+}
+
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes loading {
+
+    0% {
+        left: -40%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes rotate {
+
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+
+    .prediction-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .prediction-header {
+        padding: 25px;
+    }
+
+    .prediction-header h1 {
+        font-size: 28px;
+    }
+
+    .yield-card h1 {
+        font-size: 40px;
+    }
+}

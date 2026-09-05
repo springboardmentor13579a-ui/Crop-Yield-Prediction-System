@@ -1,0 +1,174 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:#e9f7ef;
+
+overflow-x:hidden;
+
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+button{
+
+cursor:pointer;
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+input{
+
+outline:none;
+
+}
+/* =========================================================
+   FINAL MOBILE LAYOUT FIX
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    html,
+    body,
+    #root {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
+
+    .layout {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden !important;
+    }
+
+    .layout-right {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+
+        overflow-x: hidden !important;
+    }
+
+    .layout-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        padding: 12px !important;
+        box-sizing: border-box !important;
+
+        overflow-x: hidden !important;
+    }
+
+    /* Keep sidebar visible as a compact mobile rail */
+    .sidebar {
+        width: 54px !important;
+
+        left: 6px !important;
+        top: 82px !important;
+        bottom: 6px !important;
+
+        transform: none !important;
+
+        padding: 8px 5px !important;
+        border-radius: 15px !important;
+
+        box-sizing: border-box !important;
+    }
+
+    .sidebar-logo h2,
+    .sidebar-logo span,
+    .sidebar-footer h4,
+    .sidebar-footer span {
+        display: none !important;
+    }
+
+    .sidebar-menu a {
+        width: 40px !important;
+        height: 40px !important;
+
+        padding: 0 !important;
+
+        justify-content: center !important;
+    }
+
+    .sidebar-menu a svg {
+        font-size: 16px !important;
+    }
+
+    .sidebar-footer {
+        width: 40px !important;
+        padding: 4px !important;
+        justify-content: center !important;
+    }
+
+    .sidebar-footer img {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .logout-btn {
+        width: 40px !important;
+        height: 38px !important;
+        padding: 0 !important;
+    }
+
+    .logout-btn span {
+        display: none !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .layout-right {
+        margin-left: 0 !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+
+    .layout-content {
+        width: 100vw !important;
+        max-width: 100vw !important;
+
+        padding: 10px !important;
+    }
+
+    .dashboard,
+    .dashboard-page {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+}

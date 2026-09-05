@@ -1,0 +1,425 @@
+/* =========================================================
+   RECOMMENDATION PAGE
+   ========================================================= */
+
+.recommendation-container {
+    min-height: 100vh;
+    padding: 35px;
+    background: #f5f8f6;
+    box-sizing: border-box;
+    color: #1f2937;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.recommendation-header {
+    margin-bottom: 30px;
+}
+
+.recommendation-header h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.recommendation-header p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.recommendation-error {
+    padding: 14px 18px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   MAIN SECTIONS
+   ========================================================= */
+
+.recommendation-section,
+.farming-section,
+.ai-result {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   SECTION TITLE
+   ========================================================= */
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.section-title > svg {
+    font-size: 28px;
+}
+
+.section-title h2 {
+    margin: 0 0 5px;
+    font-size: 21px;
+}
+
+.section-title p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   SOIL STATS
+   ========================================================= */
+
+.recommendation-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.recommendation-stat {
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8faf9;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.recommendation-stat span {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.recommendation-stat strong {
+    font-size: 25px;
+}
+
+.recommendation-stat small {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   WARNING
+   ========================================================= */
+
+.recommendation-warning {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.recommendation-warning p {
+    margin: 8px 0 0;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   WEATHER INPUT
+   ========================================================= */
+
+.weather-input {
+    display: flex;
+    gap: 12px;
+    max-width: 650px;
+}
+
+.weather-input input {
+    flex: 1;
+    padding: 13px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+}
+
+.weather-input input:focus {
+    border-color: #16a34a;
+}
+
+.weather-input button {
+    padding: 13px 20px;
+    border: none;
+    border-radius: 9px;
+    background: #16a34a;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.weather-input button:hover {
+    background: #15803d;
+}
+
+.weather-input button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   WEATHER SUMMARY
+   ========================================================= */
+
+.weather-summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.weather-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 20px 12px;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+}
+
+.weather-item svg {
+    font-size: 24px;
+}
+
+.weather-item strong {
+    font-size: 21px;
+}
+
+.weather-item span {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   GENERATE BUTTON
+   ========================================================= */
+
+.generate-section {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.generate-button {
+    border: none;
+    border-radius: 10px;
+    padding: 15px 30px;
+    background: #15803d;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.generate-button:hover {
+    background: #166534;
+    transform: translateY(-1px);
+}
+
+.generate-button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =========================================================
+   AI RESULT
+   ========================================================= */
+
+.result-header {
+    margin-bottom: 20px;
+}
+
+.result-header h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+}
+
+.result-header p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+/* =========================================================
+   BEST CROP
+   ========================================================= */
+
+.best-crop {
+    text-align: center;
+    padding: 30px;
+    border-radius: 14px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    margin-bottom: 25px;
+}
+
+.best-crop span {
+    font-size: 14px;
+    color: #166534;
+    font-weight: 600;
+}
+
+.best-crop h1 {
+    margin: 10px 0;
+    font-size: 38px;
+    text-transform: capitalize;
+}
+
+.best-crop p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   TOP CROPS
+   ========================================================= */
+
+.top-crops h2 {
+    margin: 0 0 15px;
+    font-size: 20px;
+}
+
+.crop-results {
+    display: grid;
+    gap: 10px;
+}
+
+.crop-result {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 18px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.crop-result strong {
+    min-width: 25px;
+}
+
+.crop-result span {
+    flex: 1;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.crop-result b {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FARMING SUGGESTIONS
+   ========================================================= */
+
+.suggestions-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.suggestion-item {
+    padding: 17px;
+    border-radius: 11px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .recommendation-container {
+        padding: 25px;
+    }
+
+    .recommendation-stats,
+    .weather-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .suggestions-list {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .recommendation-container {
+        padding: 18px;
+    }
+
+    .recommendation-header h1 {
+        font-size: 26px;
+    }
+
+    .recommendation-section,
+    .farming-section,
+    .ai-result {
+        padding: 18px;
+    }
+
+    .recommendation-stats,
+    .weather-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .weather-input {
+        flex-direction: column;
+    }
+
+    .generate-button {
+        width: 100%;
+    }
+
+    .best-crop h1 {
+        font-size: 30px;
+    }
+
+}

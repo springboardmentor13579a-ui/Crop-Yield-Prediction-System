@@ -1,0 +1,855 @@
+/* =========================================================
+   SOIL HEALTH ANALYSIS
+========================================================= */
+
+.soil-container {
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 110px 6% 60px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef9f0,
+            #ffffff
+        );
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.soil-back-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    border: 1px solid #bbf7d0;
+
+    background: white;
+
+    color: #166534;
+
+    padding: 10px 16px;
+
+    border-radius: 11px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.soil-back-button:hover {
+    background: #ecfdf5;
+
+    transform: translateX(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(22, 101, 52, 0.10);
+}
+
+.soil-back-button svg {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.soil-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    text-align: left;
+
+    margin-bottom: 35px;
+}
+
+.soil-title-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dcfce7,
+            #bbf7d0
+        );
+
+    color: #15803d;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+
+    flex-shrink: 0;
+}
+
+.soil-header h1 {
+    margin: 0 0 5px;
+
+    color: #166534;
+
+    font-size: 42px;
+
+    line-height: 1.15;
+
+    font-weight: 700;
+}
+
+.soil-header p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.soil-search {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: stretch;
+
+    gap: 12px;
+
+    max-width: 800px;
+
+    margin: 0 auto 35px;
+}
+
+.soil-input-wrapper {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 4px 15px;
+
+    background: white;
+
+    border: 1px solid #dcebe0;
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.05);
+
+    box-sizing: border-box;
+}
+
+.soil-input-wrapper svg {
+    color: #16a34a;
+
+    font-size: 15px;
+
+    flex-shrink: 0;
+}
+
+.soil-search input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    padding: 12px 4px;
+
+    color: #1f2937;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+.soil-search input::placeholder {
+    color: #94a3b8;
+}
+
+.soil-search button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: none;
+
+    padding: 13px 22px;
+
+    border-radius: 13px;
+
+    background: #16a34a;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 7px 18px rgba(22, 163, 74, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.soil-search button:hover {
+    background: #15803d;
+
+    transform: translateY(-1px);
+}
+
+.soil-search button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.soil-results {
+    width: 100%;
+}
+
+
+/* =========================================================
+   SCORE
+========================================================= */
+
+.soil-score-card {
+    max-width: 760px;
+
+    margin: 0 auto 35px;
+
+    padding: 28px 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #15803d,
+            #22c55e
+        );
+
+    color: white;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 15px 35px rgba(22, 101, 52, 0.18);
+
+    box-sizing: border-box;
+}
+
+.score-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 16px;
+
+    background: rgba(255,255,255,0.16);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+
+    flex-shrink: 0;
+}
+
+.soil-score-card span {
+    display: block;
+
+    font-size: 13px;
+
+    opacity: 0.9;
+
+    margin-bottom: 4px;
+}
+
+.soil-score-card h1 {
+    margin: 0;
+
+    font-size: 48px;
+
+    line-height: 1.1;
+}
+
+.soil-score-card p {
+    margin: 6px 0 0;
+
+    font-size: 13px;
+
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.soil-section {
+    width: 100%;
+
+    margin-bottom: 30px;
+
+    background: #ffffff;
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    border: 1px solid #e6f1e9;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.05);
+
+    box-sizing: border-box;
+}
+
+.soil-section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.section-title-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+
+    background: #ecfdf5;
+
+    color: #16a34a;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+.soil-section-heading h2 {
+    margin: 0 0 4px;
+
+    color: #14532d;
+
+    font-size: 20px;
+}
+
+.soil-section-heading p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   NUTRIENT GRID
+========================================================= */
+
+.soil-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+.soil-card {
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fcf9
+        );
+
+    border: 1px solid #dfeee3;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    text-align: center;
+
+    min-width: 0;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.soil-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.soil-card > span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    margin-bottom: 10px;
+}
+
+.soil-card strong {
+    display: block;
+
+    color: #166534;
+
+    font-size: 34px;
+
+    line-height: 1;
+
+    margin-bottom: 8px;
+}
+
+.soil-card small {
+    color: #16a34a;
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   INFORMATION GRID
+========================================================= */
+
+.soil-info {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.recommend-card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    border: 1px solid #e6f1e9;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.05);
+
+    min-width: 0;
+
+    box-sizing: border-box;
+}
+
+.recommend-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 17px;
+}
+
+.recommend-heading > div {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 11px;
+
+    background: #ecfdf5;
+
+    color: #16a34a;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+.recommend-heading h2 {
+    margin: 0;
+
+    color: #166534;
+
+    font-size: 17px;
+
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   CROP TAGS
+========================================================= */
+
+.crop-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+.crop-list span {
+    background: #ecfdf5;
+
+    color: #166534;
+
+    border: 1px solid #bbf7d0;
+
+    padding: 9px 14px;
+
+    border-radius: 25px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FERTILIZER
+========================================================= */
+
+.fertilizer-result strong {
+    display: block;
+
+    color: #16a34a;
+
+    font-size: 26px;
+
+    line-height: 1.3;
+
+    margin-bottom: 7px;
+}
+
+.fertilizer-result p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   AI TEXT
+========================================================= */
+
+.ai-soil-text {
+    margin: 0;
+
+    color: #475569;
+
+    line-height: 1.75;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   IMPROVEMENTS
+========================================================= */
+
+.soil-improvements {
+    margin: 0;
+
+    padding-left: 19px;
+}
+
+.soil-improvements li {
+    margin-bottom: 9px;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.soil-improvements li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .soil-container {
+        padding: 100px 24px 45px;
+    }
+
+    .soil-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .soil-info {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .soil-container {
+        padding: 88px 16px 30px;
+    }
+
+    .soil-header {
+        justify-content: flex-start;
+
+        align-items: flex-start;
+
+        margin-bottom: 22px;
+    }
+
+    .soil-title-icon {
+        width: 46px;
+        height: 46px;
+
+        border-radius: 13px;
+
+        font-size: 20px;
+    }
+
+    .soil-header h1 {
+        font-size: 28px;
+    }
+
+    .soil-header p {
+        font-size: 12px;
+
+        line-height: 1.5;
+    }
+
+    .soil-search {
+        flex-direction: column;
+
+        margin-bottom: 25px;
+    }
+
+    .soil-search button {
+        width: 100%;
+    }
+
+    .soil-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .soil-section {
+        padding: 18px;
+
+        border-radius: 16px;
+    }
+
+    .soil-card {
+        padding: 18px 10px;
+    }
+
+    .soil-card strong {
+        font-size: 28px;
+    }
+
+    .soil-score-card {
+        padding: 22px;
+
+        border-radius: 17px;
+
+        margin-bottom: 22px;
+    }
+
+    .soil-score-card h1 {
+        font-size: 39px;
+    }
+
+    .score-icon {
+        width: 48px;
+        height: 48px;
+
+        font-size: 22px;
+    }
+
+    .recommend-card {
+        padding: 19px;
+
+        border-radius: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .soil-container {
+        padding-left: 10px;
+
+        padding-right: 10px;
+    }
+
+    .soil-back-button {
+        padding: 8px 13px;
+
+        font-size: 12px;
+    }
+
+    .soil-header {
+        gap: 10px;
+    }
+
+    .soil-title-icon {
+        width: 40px;
+        height: 40px;
+
+        font-size: 18px;
+    }
+
+    .soil-header h1 {
+        font-size: 23px;
+    }
+
+    .soil-header p {
+        font-size: 10px;
+    }
+
+    .soil-grid {
+        gap: 8px;
+    }
+
+    .soil-card {
+        padding: 15px 7px;
+    }
+
+    .soil-card > span {
+        font-size: 10px;
+    }
+
+    .soil-card strong {
+        font-size: 24px;
+    }
+
+    .soil-card small {
+        font-size: 9px;
+    }
+
+    .soil-score-card {
+        gap: 13px;
+
+        padding: 18px;
+    }
+
+    .soil-score-card h1 {
+        font-size: 34px;
+    }
+
+    .fertilizer-result strong {
+        font-size: 22px;
+    }
+
+}

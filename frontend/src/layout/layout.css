@@ -1,0 +1,206 @@
+/* =========================================================
+   MAIN APPLICATION LAYOUT
+========================================================= */
+
+.layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background: #f5f7f9;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.layout-right {
+    margin-left: 250px;
+
+    width: calc(100% - 250px);
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    transition:
+        margin-left 0.25s ease,
+        width 0.25s ease;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.layout-content {
+    margin-top: 95px;
+
+    width: 100%;
+    min-width: 0;
+
+    min-height: calc(100vh - 95px);
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background: #f5f7f9;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .layout-right {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .layout-content {
+        padding: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    /*
+      Sidebar becomes a compact navigation rail.
+      It is NOT pushed off-screen anymore.
+    */
+
+    .layout-right {
+        margin-left: 88px;
+        width: calc(100% - 88px);
+    }
+
+    .layout-content {
+        margin-top: 90px;
+        padding: 18px;
+
+        min-height: calc(100vh - 90px);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .layout {
+        width: 100%;
+        min-width: 0;
+
+        overflow-x: hidden;
+    }
+
+    .layout-right {
+        margin-left: 0;
+        width: 100%;
+
+        min-width: 0;
+    }
+
+    .layout-content {
+        width: 100%;
+
+        margin-top: 78px;
+
+        padding: 14px;
+
+        min-height: calc(100vh - 78px);
+
+        overflow-x: hidden;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .layout-content {
+        padding: 10px;
+    }
+
+}
+/* =========================================================
+   FINAL MOBILE SIDEBAR + CONTENT FIX
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .layout {
+        width: 100%;
+        min-width: 0;
+        overflow-x: hidden;
+    }
+
+    /*
+       Sidebar is visible as a compact mobile rail.
+       Therefore the content MUST reserve space for it.
+    */
+    .layout-right {
+        margin-left: 66px !important;
+        width: calc(100% - 66px) !important;
+
+        min-width: 0 !important;
+        max-width: calc(100% - 66px) !important;
+
+        overflow-x: hidden;
+    }
+
+    .layout-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+
+        padding: 12px !important;
+
+        box-sizing: border-box;
+
+        overflow-x: hidden;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .layout-right {
+        margin-left: 62px !important;
+        width: calc(100% - 62px) !important;
+        max-width: calc(100% - 62px) !important;
+    }
+
+    .layout-content {
+        padding: 10px !important;
+    }
+}

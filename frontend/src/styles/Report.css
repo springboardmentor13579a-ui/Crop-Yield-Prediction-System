@@ -1,0 +1,1004 @@
+/* =========================================================
+   REPORT PAGE
+========================================================= */
+
+.report-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    color: #173b2b;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.report-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.report-title > svg {
+    font-size: 42px;
+    color: #0b6b3a;
+}
+
+.report-title h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.report-title p {
+    margin: 6px 0 0;
+    color: #6c7d73;
+    font-size: 15px;
+}
+
+.print-btn {
+    border: none;
+    background: #0b6b3a;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.print-btn:hover {
+    background: #07532d;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   OVERVIEW
+========================================================= */
+
+.report-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.overview-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+
+    border: 1px solid #edf2ee;
+}
+
+.overview-card > svg {
+    font-size: 28px;
+    color: #0b6b3a;
+    flex-shrink: 0;
+}
+
+.overview-card span {
+    display: block;
+    font-size: 13px;
+    color: #7b8b82;
+}
+
+.overview-card strong {
+    display: block;
+    font-size: 21px;
+    margin-top: 4px;
+    color: #173b2b;
+}
+
+.overview-card p {
+    margin: 3px 0 0;
+    color: #687970;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   YIELD
+========================================================= */
+
+.yield-report-card {
+    background: linear-gradient(
+        135deg,
+        #063f25,
+        #0b6b3a
+    );
+
+    color: white;
+
+    border-radius: 18px;
+    padding: 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 80, 40, 0.18);
+}
+
+.yield-report-icon {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 38px;
+
+    flex-shrink: 0;
+}
+
+.yield-report-card span {
+    font-size: 14px;
+    opacity: 0.85;
+}
+
+.yield-report-card h2 {
+    margin: 4px 0;
+    font-size: 48px;
+    line-height: 1;
+}
+
+.yield-report-card p {
+    margin: 8px 0 0;
+    font-size: 15px;
+}
+
+.yield-model {
+    margin-left: auto;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+
+    padding-left: 30px;
+
+    min-width: 240px;
+}
+
+.yield-model span,
+.yield-model strong,
+.yield-model small {
+    display: block;
+}
+
+.yield-model strong {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.yield-model small {
+    opacity: 0.75;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MODEL OUTPUT
+========================================================= */
+
+.model-output-card {
+    background: white;
+
+    padding: 18px 22px;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+    border: 1px solid #edf2ee;
+}
+
+.model-output-card > svg {
+    color: #0b6b3a;
+    font-size: 25px;
+}
+
+.model-output-card span {
+    display: block;
+
+    font-size: 13px;
+
+    color: #7a8a81;
+
+    margin-bottom: 4px;
+}
+
+.model-output-card strong {
+    font-size: 20px;
+    color: #173b2b;
+}
+
+
+/* =========================================================
+   GENERAL SECTION
+========================================================= */
+
+.report-section {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    margin-bottom: 22px;
+
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.06);
+
+    border: 1px solid #edf2ee;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 22px;
+}
+
+.section-heading > svg {
+    color: #0b6b3a;
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size: 22px;
+
+    color: #173b2b;
+}
+
+.section-heading p {
+    margin: 4px 0 0;
+
+    color: #75847c;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   WEATHER / METRICS
+========================================================= */
+
+.metric-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.metric-card {
+    background: #f5f9f6;
+
+    border-radius: 13px;
+
+    padding: 20px;
+
+    border: 1px solid #e5eee8;
+
+    position: relative;
+}
+
+.metric-card > svg {
+    color: #0b6b3a;
+
+    font-size: 22px;
+
+    margin-bottom: 10px;
+}
+
+.metric-card span {
+    display: block;
+
+    color: #617269;
+
+    font-size: 14px;
+}
+
+.metric-card strong {
+    display: block;
+
+    font-size: 27px;
+
+    margin: 7px 0;
+
+    color: #0b6b3a;
+}
+
+.metric-card small {
+    color: #829087;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SOIL SCORE
+========================================================= */
+
+.soil-score {
+    background: #f5f9f6;
+
+    border-radius: 14px;
+
+    padding: 20px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid #e5eee8;
+}
+
+.soil-score > div:first-child {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.soil-score span {
+    font-weight: 600;
+
+    color: #173b2b;
+}
+
+.soil-score strong {
+    font-size: 28px;
+
+    color: #0b6b3a;
+}
+
+.score-bar {
+    height: 10px;
+
+    background: #dce8e1;
+
+    border-radius: 20px;
+
+    margin: 14px 0 8px;
+
+    overflow: hidden;
+}
+
+.score-bar div {
+    height: 100%;
+
+    background: #159447;
+
+    border-radius: 20px;
+
+    transition: width 0.5s ease;
+}
+
+.soil-score p {
+    margin: 0;
+
+    color: #6f7e75;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   NUTRIENTS
+========================================================= */
+
+.nutrient-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+.nutrient-card {
+    border: 1px solid #e3ebe6;
+
+    border-radius: 13px;
+
+    padding: 18px;
+
+    background: #ffffff;
+
+    transition: 0.2s ease;
+}
+
+.nutrient-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+.nutrient-card span {
+    display: block;
+
+    color: #6d7b73;
+
+    font-size: 14px;
+}
+
+.nutrient-card strong {
+    display: block;
+
+    font-size: 30px;
+
+    margin: 7px 0;
+
+    color: #173b2b;
+}
+
+.nutrient-card small {
+    display: inline-block;
+
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    background: #e9f5ed;
+
+    color: #168043;
+
+    font-weight: 600;
+
+    font-size: 12px;
+}
+
+.nutrient-card .status-low {
+    background: #fff0ed;
+
+    color: #c34c39;
+}
+
+.nutrient-card .status-medium {
+    background: #fff8df;
+
+    color: #a37b00;
+}
+
+.nutrient-card .status-high {
+    background: #e7f7ed;
+
+    color: #168043;
+}
+
+.nutrient-card .status-neutral {
+    background: #eaf3ff;
+
+    color: #3c6ea8;
+}
+
+
+/* =========================================================
+   RECOMMENDATIONS
+========================================================= */
+
+.recommendation-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.recommendation-card {
+    border: 1px solid #e1eae4;
+
+    border-radius: 14px;
+
+    padding: 22px;
+
+    background: white;
+}
+
+.recommendation-icon {
+    font-size: 28px;
+
+    margin-bottom: 10px;
+}
+
+.recommendation-card h3 {
+    margin: 0 0 12px;
+
+    color: #173b2b;
+
+    font-size: 17px;
+}
+
+.recommendation-card strong {
+    font-size: 19px;
+
+    color: #0b6b3a;
+}
+
+.recommendation-card p {
+    color: #68776f;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+.crop-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.crop-tags span {
+    background: #e7f6ed;
+
+    color: #08733b;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.ai-card {
+    background: #f5faf7;
+}
+
+
+/* =========================================================
+   FINAL SUMMARY
+========================================================= */
+
+.final-summary {
+    background: #eaf6ef;
+
+    border: 1px solid #cce6d5;
+
+    border-radius: 16px;
+
+    padding: 23px;
+
+    display: flex;
+
+    gap: 16px;
+
+    align-items: flex-start;
+
+    margin-bottom: 25px;
+}
+
+.final-summary > svg {
+    font-size: 30px;
+
+    color: #0b6b3a;
+
+    flex-shrink: 0;
+}
+
+.final-summary h2 {
+    margin: 0 0 7px;
+
+    color: #173b2b;
+}
+
+.final-summary p {
+    margin: 0;
+
+    line-height: 1.7;
+
+    color: #52645a;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.report-footer {
+    text-align: center;
+
+    color: #7b8981;
+
+    font-size: 13px;
+
+    padding: 20px 0 30px;
+}
+
+.report-footer p {
+    margin: 5px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.report-loading {
+    min-height: 70vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.report-loading-icon {
+    font-size: 55px;
+
+    color: #0b6b3a;
+
+    animation: reportPulse 1.2s infinite;
+}
+
+.report-loading h2 {
+    margin: 15px 0 5px;
+
+    color: #173b2b;
+}
+
+.report-loading p {
+    color: #718078;
+}
+
+.report-loader {
+    width: 260px;
+
+    height: 6px;
+
+    background: #dce8e1;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    margin-top: 20px;
+}
+
+.report-loader::before {
+    content: "";
+
+    display: block;
+
+    width: 40%;
+
+    height: 100%;
+
+    background: #0b6b3a;
+
+    animation: reportLoading 1.2s infinite;
+}
+
+@keyframes reportLoading {
+
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(350%);
+    }
+
+}
+
+@keyframes reportPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.12);
+    }
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.report-error {
+    min-height: 70vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+.report-error > svg {
+    font-size: 50px;
+
+    color: #c44b3a;
+
+    margin-bottom: 10px;
+}
+
+.report-error h2 {
+    color: #173b2b;
+
+    margin-bottom: 5px;
+}
+
+.report-error p {
+    color: #718078;
+
+    margin-bottom: 20px;
+}
+
+.report-error button {
+    border: none;
+
+    background: #0b6b3a;
+
+    color: white;
+
+    padding: 11px 20px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.report-error button:hover {
+    background: #07532d;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .report-overview {
+        grid-template-columns: 1fr;
+    }
+
+    .recommendation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .metric-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .nutrient-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .yield-model {
+        margin-left: 0;
+
+        border-left: none;
+
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+
+        padding-left: 0;
+
+        padding-top: 15px;
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .report-page {
+        padding: 15px;
+    }
+
+    .report-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+
+    .report-title h1 {
+        font-size: 24px;
+    }
+
+    .report-title > svg {
+        font-size: 34px;
+    }
+
+    .report-overview,
+    .metric-grid,
+    .nutrient-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .yield-report-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        padding: 24px;
+    }
+
+    .yield-report-card h2 {
+        font-size: 40px;
+    }
+
+    .yield-model {
+        width: 100%;
+    }
+
+    .report-section {
+        padding: 20px;
+    }
+
+    .section-heading h2 {
+        font-size: 19px;
+    }
+
+    .final-summary {
+        padding: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print {
+
+    body {
+        background: white !important;
+    }
+
+    .report-page {
+        max-width: none;
+
+        padding: 0;
+    }
+
+    .print-btn {
+        display: none;
+    }
+
+    .report-section,
+    .overview-card,
+    .model-output-card {
+        box-shadow: none;
+    }
+
+    .report-header {
+        margin-bottom: 15px;
+    }
+
+    .yield-report-card {
+        box-shadow: none;
+    }
+
+}
+/* =========================================================
+   REPORT ACTIONS
+========================================================= */
+
+.report-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.reports-btn {
+    text-decoration: none;
+    border: 1px solid #0b6b3a;
+    background: #ffffff;
+    color: #0b6b3a;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    font-weight: 600;
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.reports-btn:hover {
+    background: #eaf6ef;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MOBILE REPORT ACTIONS
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .report-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .reports-btn,
+    .print-btn {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+}

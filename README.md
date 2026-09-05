@@ -1,479 +1,698 @@
-# YieldSense AI — Crop Yield Prediction & Agricultural Productivity Forecasting System
+# 🌾 YieldSense AI — AI-Powered Crop Yield Prediction & Agricultural Intelligence Platform
 
-> **Built by Yashraj** · Full-Stack AI Platform · React + FastAPI + Machine Learning
+> **Full-Stack AI Platform** · React + FastAPI + MongoDB · Machine Learning
 
----
+**YieldSense AI** is a full-stack agricultural intelligence platform designed to help farmers make informed, data-driven decisions instead of relying only on traditional experience or assumptions.
 
-**YieldSense AI** is a complete, production-ready agricultural intelligence platform that I built from the ground up. The idea is simple: farmers and agribusinesses shouldn't have to guess what their harvest will look like. They deserve real data-driven forecasts. This system takes in soil measurements, weather conditions, and farming parameters — and returns accurate, AI-powered crop yield predictions in real time.
+The platform combines **crop yield prediction, soil health analysis, real-time weather intelligence, crop recommendation, agricultural risk assessment, analytics, reporting, and agricultural officer support** into a single web application.
 
-At its heart, it's a 3-in-1 platform — a crop yield forecasting engine, a soil health analyser, and a crop recommendation system — all wrapped inside a clean, interactive dashboard.
+The objective is simple:
+
+> **Turn agricultural data into predictions, recommendations, insights, and better farming decisions.**
 
 ---
 
 ## What This Project Actually Does
 
-Farmers and agricultural researchers can:
+Farmers can use YieldSense AI to:
 
-- **Run yield forecasts** — Enter soil data, weather conditions, crop type, and region to instantly get an AI prediction of expected harvest in `kg/ha` and total `tonnes`.
-- **See which crop to grow** — The system runs predictions across all 8 supported crops (Wheat, Rice, Maize, Soybean, Cotton, Barley, Sugarcane, Potato) and ranks them by predicted yield for the same field inputs. This tells a farmer which crop will give the most output this season.
-- **Monitor Soil Health** — A live Soil Health Index card evaluates NPK ratios, soil pH, and organic matter against agronomic targets. A donut ring shows the overall score out of 100.
-- **Track prediction history** — Every forecast is saved with full metadata. Users can search, filter, and export their history as a CSV file.
-- **Admin oversight** — An admin panel allows approving/rejecting new user registrations, viewing platform-wide stats, and managing farmer accounts.
-
----
-
-## How the System is Structured
-
-Here's a high-level view of how all the pieces connect:
-
-```mermaid
-graph TD
-    subgraph "User Layer"
-        U1["Farmer / Agronomist / Admin"]
-        U2["Web Browser"]
-    end
-
-    subgraph "Frontend (React + Vite)"
-        F1["Login / Register Page"]
-        F2["Main Analytics Dashboard"]
-        F3["Yield Forecasting Engine"]
-        F4["Admin Control Panel"]
-    end
-
-    subgraph "Backend API (FastAPI)"
-        B1["JWT Auth Router /api/auth"]
-        B2["Prediction Router /api/prediction"]
-        B3["Farm Router /api/farm"]
-        B4["Admin Router /api/admin"]
-        B5["Soil & Weather Routers"]
-    end
-
-    subgraph "AI / ML Pipeline"
-        M1["Feature Engineering & Preprocessing"]
-        M2["Random Forest Regressor"]
-        M3["Extra Trees Regressor"]
-        M4["XGBoost Regressor"]
-        M5["Weighted Ensemble Model (model.pkl)"]
-    end
-
-    subgraph "Data Layer"
-        D1[("MongoDB Database")]
-        D2[("model.pkl — Trained AI Bundle")]
-        D3[("CSV Datasets (Kaggle / FAOSTAT)")]
-    end
-
-    U1 --> U2 --> F1
-    F1 --> F2 & F3 & F4
-    F2 & F3 & F4 <--> B1 & B2 & B3 & B4 & B5
-    B2 --> M1 --> M2 & M3 & M4 --> M5
-    M5 --> D2
-    B1 & B2 & B3 & B4 <--> D1
-    M1 <--> D3
-```
+- **Predict crop yield** using a trained Machine Learning regression model.
+- **Analyze soil health** using Nitrogen, Phosphorus, Potassium and pH values.
+- **Monitor current weather** for a selected city using real-time weather data.
+- **Get AI-based crop recommendations** based on soil and environmental conditions.
+- **Assess agricultural risk** using an Isolation Forest anomaly detection model.
+- **View analytics dashboards** containing agricultural and prediction insights.
+- **Generate productivity and seasonal reports**.
+- **Track prediction information** for future reference.
+- **Contact agricultural officers** and request expert advice.
+- **Manage users and platform activity** through administrator functionality.
 
 ---
 
-## End-to-End Prediction Workflow
+## 🎯 Problem Statement
 
-This is the step-by-step journey of a single yield prediction request — from the farmer clicking "Run Forecast" to receiving a result:
+Traditionally, farmers may depend on previous experience, neighbouring farmers, or general assumptions when deciding:
 
-```mermaid
-flowchart TD
-    A["Farmer fills in the Forecast Form\n(Crop, Region, Season, NPK, Soil pH, Rainfall, Temp, Area)"]
-    B["React frontend calls POST /api/prediction/predict via Axios"]
-    C["JWT Middleware validates the Bearer token"]
-    D["FastAPI receives PredictionRequest — Pydantic validates all fields"]
-    E["Feature Engineering in preprocessing.py\n• rainfall_per_temp\n• npk_sum\n• n_p_ratio\n• ph_deviation\n• temp_humidity_index"]
-    F["StandardScaler normalises numerical features\nOneHotEncoder encodes region, crop, season, soil_type, irrigation_type"]
-    G1["Random Forest Regressor\n(40% weight)"]
-    G2["Extra Trees Regressor\n(40% weight)"]
-    G3["XGBoost Regressor\n(20% weight)"]
-    H["Weighted Ensemble Blend\npredicted_log_yield → expm1() → kg/ha"]
-    I["Post-processing\n• Soil Health Score (0–100)\n• Weather Impact Score\n• Risk Assessment\n• Crop Recommendations"]
-    J["Result saved to MongoDB\n(fallback: in-memory store)"]
-    K["Dashboard displays:\nYield (kg/ha) · Total Tonnes · Productivity Score\nSoil Health Ring · Crop Suitability Ranking"]
+- Which crop should be planted?
+- What yield can be expected?
+- Is the soil suitable?
+- How are current weather conditions affecting agriculture?
+- Are the current conditions creating agricultural risks?
+- What actions can improve productivity?
 
-    A --> B --> C --> D --> E --> F
-    F --> G1 & G2 & G3
-    G1 & G2 & G3 --> H --> I --> J --> K
-```
+These decisions become difficult when soil conditions, weather, crop requirements and agricultural environments vary.
 
----
+### Proposed Solution
 
-## ML Crop Recommendation Flow
+YieldSense AI integrates agricultural data, Machine Learning, weather information, analytics and expert guidance into one platform.
 
-When a farmer asks "which crop should I grow?", the system doesn't guess — it runs the AI model 8 times (once per crop) and returns a ranked leaderboard:
+```text
+Farmer
+   │
+   ▼
+Login / Registration
+   │
+   ▼
+Select State
+   │
+   ├──────────────► Soil Analysis
+   │
+   ▼
+Enter City
+   │
+   ├──────────────► Weather Intelligence
+   │
+   ▼
+Select Crop
+   │
+   ▼
+Crop Yield Prediction
+   │
+   ├──────────────► Crop Recommendation
+   │
+   ├──────────────► Risk Assessment
+   │
+   ├──────────────► Analytics
+   │
+   └──────────────► Reports
+                  │
+                  ▼
+        Agricultural Officer AdviceKey Features
+🌾 Crop Yield Prediction
 
-```mermaid
-flowchart LR
-    A["Same field inputs\n(soil, weather, region, season)"]
-    B["Run predict_yield() for all 8 crops"]
-    C1["Wheat → 3,200 kg/ha"]
-    C2["Rice → 3,800 kg/ha"]
-    C3["Maize → 4,600 kg/ha"]
-    C4["Soybean → 2,900 kg/ha"]
-    C5["Others..."]
-    D["Sort descending by predicted yield"]
-    E["Calculate suitability % vs top crop"]
-    F["Ranked leaderboard with % bars\nDisplayed in Yield Forecasting tab"]
+The platform uses a trained Random Forest Regression model to estimate crop yield.
 
-    A --> B --> C1 & C2 & C3 & C4 & C5
-    C1 & C2 & C3 & C4 & C5 --> D --> E --> F
-```
+Prediction inputs include:
 
----
+Area
+Crop
+Year
+Rainfall
+Pesticides
+Temperature
 
-## The Machine Learning Model — How It Was Built
+The prediction result is returned by the FastAPI backend and can be stored for historical analysis.
 
-The AI model is an **ensemble of three algorithms** trained on crop yield datasets combining FAOSTAT records and Kaggle agricultural data:
+Prediction Workflow
+Farmer Inputs
+      ↓
+React Frontend
+      ↓
+FastAPI REST API
+      ↓
+Feature Preparation
+      ↓
+Random Forest Regression
+      ↓
+Predicted Yield
+      ↓
+MongoDB Storage
+      ↓
+Dashboard / Analytics / Reports
+🌱 Soil Health Analysis
 
-| Component | Algorithm | Role | Weight |
-|---|---|---|---|
-| **Model 1** | Random Forest Regressor | Handles categorical patterns, regions, seasons | 40% |
-| **Model 2** | Extra Trees Regressor | Reduces variance through extreme randomization | 40% |
-| **Model 3** | XGBoost / Gradient Boosting | Captures complex non-linear feature interactions | 20% |
+The farmer enters a state and the system retrieves/analyzes the available soil information.
 
-**Target variable**: `log1p(yield_kg_per_ha)` — log-transformed to normalize the highly skewed yield distribution. Predictions are converted back with `expm1()`.
+The soil module evaluates:
 
-**Feature Engineering** — The model sees 14 features total, including 5 engineered ones:
+Nitrogen (N)
+Phosphorus (P)
+Potassium (K)
+Soil pH
 
-| Feature | How it's calculated | Why it matters |
-|---|---|---|
-| `rainfall_per_temp` | `rainfall / (temp + 1)` | Captures water-heat balance |
-| `npk_sum` | `N + P + K` | Total soil nutrient load |
-| `n_p_ratio` | `N / (P + 1)` | Nitrogen-phosphorus balance |
-| `ph_deviation` | `abs(pH - 6.8)` | Penalty for pH away from the ideal neutral |
-| `temp_humidity_index` | `temp × (humidity / 100)` | Heat-moisture stress index |
+The result provides:
 
-**Hyperparameter Tuning**: Random Forest was tuned using `RandomizedSearchCV` with 5-fold cross-validation over `n_estimators`, `max_depth`, and `min_samples_leaf`.
+Soil Health Score
+Nutrient status
+Fertilizer recommendation
+Suitable crops
+Soil improvement advice
+Example
+State       : Tamil Nadu
+Nitrogen    : 80
+Phosphorus  : 38
+Potassium   : 30
+pH          : 6.6
+Soil Score  : 85/100
+🌦 Weather Intelligence
 
-**Model Persistence**: The trained bundle (`preprocessor + rf_model + et_model + boost_model + metrics`) is serialized as `backend/ml/model.pkl` using `joblib`.
+Current weather conditions are retrieved for the selected city using the OpenWeather API.
 
----
+The platform displays:
 
-## Technology Stack
+Temperature
+Humidity
+Rainfall
+Wind speed
+Cloud cover
+Atmospheric pressure
+Weather condition
+Weather description
 
-| Layer | Technology | Why |
-|---|---|---|
-| **Frontend** | React 19 + Vite | Fast SPA with HMR during development |
-| **UI Styling** | Tailwind CSS (via CDN classes) | Utility-first, responsive, no CSS bloat |
-| **Charts** | Recharts | Declarative chart components for bar/line charts |
-| **Icons** | Lucide React | Consistent, lightweight icon set |
-| **HTTP Client** | Axios | Auto JWT header injection via request interceptors |
-| **Backend** | Python + FastAPI | Async REST API, auto Swagger docs at `/docs` |
-| **ML** | scikit-learn + XGBoost + joblib | Ensemble model training, serialization, inference |
-| **Data Processing** | Pandas + NumPy | Dataset cleaning, feature engineering |
-| **Auth** | JWT (python-jose) + bcrypt | Stateless token auth with hashed passwords |
-| **Database** | MongoDB (pymongo) | Flexible document store + in-memory fallback |
-| **ASGI Server** | Uvicorn | Production-grade async Python server |
+The application also provides basic farming guidance based on current conditions.
 
----
+🤖 AI Crop Recommendation
 
-## Project Structure
+The crop recommendation module uses a trained Machine Learning model.
 
-```
-CropYield/
-├── backend/
-│   ├── app.py                    # FastAPI application entry point
-│   ├── main.py                   # Uvicorn runner
-│   ├── requirements.txt          # Python dependencies
-│   ├── database/
-│   │   └── db.py                 # MongoDB connection manager
-│   ├── models/                   # Pydantic data models
-│   │   ├── user.py
-│   │   ├── prediction.py
-│   │   ├── farm.py
-│   │   ├── crop.py
-│   │   ├── soil.py
-│   │   └── weather.py
-│   ├── routes/                   # API route handlers
-│   │   ├── auth.py               # Register, Login, Google OAuth, JWT
-│   │   ├── prediction.py         # Yield prediction + crop recommendation
-│   │   ├── farm.py               # Farm CRUD operations
-│   │   ├── recommendation.py     # Agronomic recommendation engine
-│   │   ├── admin.py              # Admin stats, user approval/rejection
-│   │   ├── soil.py               # Soil health assessment
-│   │   ├── weather.py            # Weather analysis
-│   │   └── user.py               # User profile management
-│   └── ml/
-│       ├── train_model.py        # Model training script
-│       ├── predict.py            # Inference engine
-│       ├── preprocessing.py      # Feature engineering + scaling pipeline
-│       └── model.pkl             # Serialized trained ensemble (36MB)
+Input Features
+N
+P
+K
+Temperature
+Humidity
+pH
+Rainfall
+
+The model provides:
+
+Recommended crop
+Top crop recommendations
+Confidence values
+Recommendation Workflow
+Soil Data
+    +
+Weather Data
+    ↓
+Machine Learning Model
+    ↓
+Crop Prediction
+    ↓
+Top Recommendations
+    ↓
+Farmer Decision Support
+⚠️ Agricultural Risk Assessment
+
+YieldSense AI includes an anomaly-based agricultural risk assessment system using Isolation Forest.
+
+The model evaluates the combined agricultural conditions and identifies whether the current combination resembles patterns learned during model training.
+
+Risk Inputs
+State
+Crop
+Nitrogen
+Phosphorus
+Potassium
+pH
+Temperature
+Humidity
+Rainfall
+Wind
+Predicted Yield
+Risk Outputs
+AI Risk Score
+Overall Risk Level
+Normal / Anomalous classification
+Model information
+Assessment profile
+Detailed model inputs
+Risk Workflow
+Soil Conditions
+       +
+Weather Conditions
+       +
+Selected Crop
+       +
+Predicted Yield
+       ↓
+Feature Preparation
+       ↓
+Standardization
+       ↓
+Isolation Forest
+       ↓
+Anomaly Detection
+       ↓
+AI Risk Score
+       ↓
+LOW / MEDIUM / HIGH
+📊 Agricultural Analytics
+
+YieldSense AI provides interactive analytics dashboards to help users understand agricultural and prediction data.
+
+Analytics include:
+
+Total predictions
+Soil analyses
+Average predicted yield
+Highest predicted yield
+Prediction trends
+Environmental input visualization
+Yield visualization
+Prediction history
+Role-specific statistics
+
+Interactive charts are implemented to make agricultural information easier to understand.
+
+📈 Productivity & Seasonal Reports
+
+The platform includes reporting functionality for agricultural analysis.
+
+Productivity Reports
+
+Reports can provide information such as:
+
+Prediction counts
+Average yield
+Highest predicted yield
+Crop performance
+Historical productivity patterns
+Seasonal Reports
+
+Seasonal analysis can be used to study:
+
+Yield trends
+Seasonal comparisons
+Crop-season patterns
+Agricultural productivity
+👨‍🌾 Agricultural Officer Advice
+
+YieldSense AI combines AI-based decision support with human agricultural guidance.
+
+Advice Workflow
+Farmer
+   ↓
+View Agricultural Officers
+   ↓
+Select Officer
+   ↓
+Submit Question
+   ↓
+Advice Request
+   ↓
+MongoDB
+   ↓
+Officer Dashboard
+   ↓
+Officer Reply
+   ↓
+Farmer Receives Advice
+
+This allows farmers to combine Machine Learning insights with expert agricultural guidance.
+
+🔐 Authentication & Role-Based Access
+
+The application supports role-specific workflows.
+
+Role	Responsibilities
+👨‍🌾 Farmer	Prediction, soil, weather, recommendation, risk, analytics, reports and advice
+🧑‍💼 Agricultural Officer	Monitor farmer requests and provide agricultural guidance
+🛡️ Administrator	Manage users and monitor platform activity
+
+Authentication functionality includes:
+
+Registration
+Login
+Google authentication
+User management
+Role-based access
+🏗️ System Architecture
+                         ┌──────────────────┐
+                         │      Farmer      │
+                         └────────┬─────────┘
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │ React + Vite     │
+                         │ Frontend         │
+                         └────────┬─────────┘
+                                  │
+                             REST API
+                                  │
+                                  ▼
+                         ┌──────────────────┐
+                         │ FastAPI Backend  │
+                         └────────┬─────────┘
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          │                       │                       │
+          ▼                       ▼                       ▼
+   ┌─────────────┐        ┌──────────────┐        ┌─────────────┐
+   │   MongoDB   │        │ ML Services  │        │ OpenWeather │
+   │   Database  │        │              │        │     API     │
+   └─────────────┘        └───────┬──────┘        └─────────────┘
+                                  │
+                    ┌─────────────┼─────────────┐
+                    │             │             │
+                    ▼             ▼             ▼
+              Yield Model   Recommendation   Risk Model
+              Random Forest     Model       Isolation Forest
+🧠 Machine Learning Workflow
+
+The project contains separate Machine Learning workflows for different agricultural tasks.
+
+Raw Agricultural Data
+        ↓
+Data Cleaning
+        ↓
+Data Preprocessing
+        ↓
+Feature Preparation
+        ↓
+Model Training
+        ↓
+Model Evaluation
+        ↓
+Model Persistence
+        ↓
+FastAPI Integration
+        ↓
+React Dashboard
+ML Modules
+
+The backend contains dedicated modules for:
+
+Crop yield prediction
+Model evaluation
+Crop recommendation
+Recommendation prediction
+Soil analysis
+Agricultural risk prediction
+Risk model training
+1. Yield Prediction Model
+
+Algorithm: Random Forest Regressor
+
+Area
+Crop
+Year
+Rainfall
+Pesticides
+Temperature
+        ↓
+Random Forest
+        ↓
+Predicted Yield
+2. Crop Recommendation Model
+
+Algorithm: Machine Learning Classification Model
+
+N + P + K
++ Temperature
++ Humidity
++ pH
++ Rainfall
+        ↓
+Classification Model
+        ↓
+Recommended Crop
+        ↓
+Top-N Recommendations
+3. Risk Assessment Model
+
+Algorithm: Isolation Forest
+
+Soil + Weather + Crop + Yield
+             ↓
+       StandardScaler
+             ↓
+       Isolation Forest
+             ↓
+      Anomaly Detection
+             ↓
+        Risk Score
+🛠️ Technology Stack
+Layer	Technology	Purpose
+Frontend	React.js	User interface
+Build Tool	Vite	Frontend development and build
+Routing	React Router	Page navigation
+Styling	CSS	Responsive UI design
+Icons	React Icons	UI icons
+Visualization	Recharts	Analytics charts
+Backend	Python + FastAPI	REST API services
+API Server	Uvicorn	ASGI server
+Validation	Pydantic	Request/response validation
+Database	MongoDB	Persistent data storage
+Database Drivers	PyMongo + Motor	MongoDB communication
+Machine Learning	Scikit-learn	ML models
+Data Processing	Pandas + NumPy	Data preparation
+Model Persistence	Joblib	Save/load trained models
+Weather	OpenWeather API	Real-time weather information
+Authentication	JWT	User authentication
+Version Control	Git + GitHub	Source control
+Containerization	Docker + Docker Compose	Deployment
+📂 Project Structure
+Crop-Yield-Prediction-Mahija-Sai-/
 │
-├── frontend/
-│   ├── index.html
-│   ├── vite.config.js
-│   ├── package.json
-│   └── src/
-│       ├── main.jsx              # React app entry
-│       ├── App.jsx               # Main application (~3100 lines — core dashboard)
-│       ├── api.js                # Axios client + all API functions
-│       ├── index.css             # Global styles + Tailwind config
-│       └── components/
-│           ├── LoginPage.jsx     # Auth login with Google OAuth
-│           └── RegisterPage.jsx  # Multi-step registration form
+├── backend/
+│   ├── app/
+│   │   ├── config/
+│   │   ├── database/
+│   │   ├── models/
+│   │   ├── routers/
+│   │   │   ├── admin.py
+│   │   │   ├── advice.py
+│   │   │   ├── analytics.py
+│   │   │   ├── auth.py
+│   │   │   ├── prediction.py
+│   │   │   ├── recommendation.py
+│   │   │   ├── report.py
+│   │   │   ├── risk.py
+│   │   │   ├── soil.py
+│   │   │   └── users.py
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   └── utils/
+│   │
+│   ├── ml/
+│   │   ├── predictor.py
+│   │   ├── soil_predictor.py
+│   │   ├── recommendation_model.py
+│   │   ├── recommendation_predictor.py
+│   │   ├── risk_predictor.py
+│   │   ├── evaluate_model.py
+│   │   ├── train_model.py
+│   │   └── train_risk_model.py
+│   │
+│   ├── models/
+│   ├── requirements.txt
+│   └── Dockerfile
+│
+├── database/
 │
 ├── datasets/
-│   ├── yield_df.csv              # Core crop yield training data
-│   ├── Crop_recommendation.csv   # NPK-based crop suitability data
-│   └── climate_change_impact_on_agriculture_2024.csv
+│   ├── raw/
+│   ├── processed/
+│   └── notebooks/
 │
-├── docs/
-│   └── assets/
-│       └── yieldsense_ui_wireframe.png
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── layout/
+│   │   ├── pages/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   └── styles/
+│   │
+│   ├── .env.example
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
 │
+├── docker-compose.yml
+├── .gitignore
 └── README.md
-```
+🔌 API Endpoints Reference
+Method	Endpoint	Description
+POST	/auth/register	Register a user
+POST	/auth/login	User login
+POST	/auth/google	Google authentication
+GET	/users	Get users
+POST	/users	Add a user
+GET	/users/{id}	Get a user
+PUT	/users/{id}	Update a user
+DELETE	/users/{id}	Delete a user
+POST	/prediction/predict	Generate crop yield prediction
+GET	/prediction/latest	Get latest prediction
+POST	/soil/analyze	Analyze soil conditions
+GET	/soil/latest	Get latest soil analysis
+GET	/soil/all	Get soil records
+POST	/recommendation/generate	Generate crop recommendations
+POST	/risk/assess	Assess agricultural risk
+GET	/analytics/dashboard	Get dashboard analytics
+GET	/report/latest	Get latest report
+GET	/advice/officers	Get agricultural officers
+POST	/advice/request	Submit advice request
+GET	/advice/farmer/{email}	Get farmer advice requests
+GET	/advice/officer/{email}	Get officer requests
+PUT	/advice/reply/{request_id}	Reply to advice request
+GET	/admin/stats	Get administrator statistics
 
----
+Full interactive API documentation is available through FastAPI Swagger UI.
 
-## API Endpoints Reference
+http://127.0.0.1:8000/docs
+🗄️ Database Integration
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/auth/register` | Register new farmer account |
-| `POST` | `/api/auth/login` | Login with email + password, returns JWT |
-| `POST` | `/api/auth/google` | Google OAuth login |
-| `GET` | `/api/auth/me` | Get current user profile |
-| `POST` | `/api/prediction/predict` | **Run AI yield prediction** |
-| `POST` | `/api/prediction/crop-recommend` | **Get crop suitability ranking for all 8 crops** |
-| `GET` | `/api/prediction/history` | Fetch user's prediction history |
-| `POST` | `/api/farm/create` | Create a new farm profile |
-| `GET` | `/api/farm/list` | List all farms for authenticated user |
-| `PUT` | `/api/farm/{id}` | Update farm details |
-| `DELETE` | `/api/farm/{id}` | Delete a farm |
-| `POST` | `/api/soil/assess` | Soil health assessment |
-| `POST` | `/api/weather/analyze` | Weather impact analysis |
-| `GET` | `/api/admin/stats` | Admin: platform-wide stats |
-| `GET` | `/api/admin/pending-users` | Admin: users awaiting approval |
-| `PUT` | `/api/admin/approve/{id}` | Admin: approve a farmer account |
-| `PUT` | `/api/admin/reject/{id}` | Admin: reject a farmer account |
-| `DELETE` | `/api/admin/farmer/{id}` | Admin: delete farmer account |
+MongoDB is used for persistent storage of application information.
 
-> Full interactive API docs available at `http://localhost:8000/docs` (Swagger UI auto-generated by FastAPI).
+The system can store:
 
----
+User information
+Farmer information
+Prediction records
+Soil analyses
+Advice requests
+Agricultural analytics data
+Report-related information
 
-## Database Schema
+MongoDB communication is handled through PyMongo and Motor.
 
-The system uses MongoDB with 5 primary collections:
+🌦 Weather Integration
 
-```mermaid
-erDiagram
-    USERS {
-        string id PK
-        string name
-        string email
-        string hashed_password
-        string role
-        string region
-        string status
-        datetime created_at
-    }
+Weather information is retrieved through the OpenWeather API.
 
-    FARMS {
-        string id PK
-        string user_id FK
-        string farm_name
-        string region
-        float area_hectares
-        string soil_type
-        string irrigation_type
-        list primary_crops
-    }
+The system obtains current weather information including:
 
-    YIELD_PREDICTIONS {
-        string id PK
-        string user_id FK
-        string crop
-        string region
-        string season
-        float area_hectares
-        float rainfall_mm
-        float temperature_celsius
-        float soil_ph
-        float nitrogen_n
-        float phosphorus_p
-        float potassium_k
-        float humidity_percent
-        float organic_matter_percent
-        float predicted_yield_kg_ha
-        float total_production_tonnes
-        float productivity_score
-        datetime created_at
-    }
+Temperature
+Humidity
+Rainfall
+Wind Speed
+Cloud Cover
+Pressure
+Weather Condition
 
-    SOIL_ASSESSMENTS {
-        string id PK
-        string region
-        float soil_ph
-        string npk_ratio
-        float soil_health_score
-        string fertility_status
-        list recommendations
-    }
+The API key is kept outside the repository using environment variables.
 
-    WEATHER_LOGS {
-        string id PK
-        string region
-        string season
-        float rainfall_mm
-        float temperature_celsius
-        float humidity_percent
-        string drought_risk
-    }
+📊 Dashboard Modules
+👨‍🌾 Farmer Dashboard
 
-    USERS ||--o{ FARMS : "owns"
-    USERS ||--o{ YIELD_PREDICTIONS : "runs"
-    YIELD_PREDICTIONS ||--o| SOIL_ASSESSMENTS : "includes"
-    YIELD_PREDICTIONS ||--o| WEATHER_LOGS : "includes"
-```
+Farmers can access:
 
----
+Crop yield prediction
+Soil analysis
+Weather intelligence
+Crop recommendation
+Risk assessment
+Prediction history
+Analytics
+Reports
+Agricultural officer advice
+🧑‍💼 Agricultural Officer Dashboard
 
-## Authentication Flow
+Officers can:
 
-The platform uses **JWT-based stateless authentication** with role-based access control (RBAC):
+View farmer-related requests
+Monitor agricultural information
+Review advice requests
+Provide agricultural guidance
+Access officer analytics
+🛡️ Admin Dashboard
 
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant F as React Frontend
-    participant B as FastAPI Backend
-    participant DB as MongoDB
+Administrators can:
 
-    U->>F: Fill Login Form (email + password)
-    F->>B: POST /api/auth/login
-    B->>DB: Lookup user by email
-    DB-->>B: User record
-    B->>B: bcrypt verify password hash
-    B-->>F: JWT access_token + user profile
-    F->>F: Store token in localStorage + Cookie
-    F-->>U: Redirect to Dashboard
+Manage users
+View platform statistics
+Monitor registrations
+Manage farmer accounts
+Review system activity
+Access analytics
+🔄 End-to-End Application Workflow
+                         Farmer
+                            │
+                            ▼
+                    Registration / Login
+                            │
+                            ▼
+                      Dashboard
+                            │
+          ┌─────────────────┼─────────────────┐
+          │                 │                 │
+          ▼                 ▼                 ▼
+      Soil Analysis      Weather          Crop Input
+          │                 │                 │
+          └─────────────────┼─────────────────┘
+                            │
+                            ▼
+                    Yield Prediction
+                            │
+                  ┌─────────┴─────────┐
+                  ▼                   ▼
+           Recommendation        Risk Assessment
+                  │                   │
+                  └─────────┬─────────┘
+                            ▼
+                   Analytics & Reports
+                            │
+                            ▼
+                    Officer Assistance
+🧪 Testing & Validation
 
-    Note over F,B: All subsequent API calls
-    F->>B: Any API request + Authorization: Bearer <token>
-    B->>B: Validate JWT signature + expiry
-    B->>B: Check user role (farmer / admin)
-    B-->>F: Protected resource response
-```
+The project includes validation of the major Machine Learning and application components.
 
----
+Yield Model
+python -c "from ml.predictor import predict_yield; print('Yield model loaded successfully')"
+Recommendation Model
+python -c "from ml.recommendation_predictor import recommend_crops; print('Recommendation model loaded successfully')"
+Risk Model
+python -c "from ml.risk_predictor import predict_risk; print('Risk model loaded successfully')"
+Frontend Production Build
+npm run build
+API Testing
 
-## Quick Start — Run it Locally
+FastAPI Swagger UI provides an interactive interface for testing the backend endpoints.
 
-### Step 1: Backend
+http://127.0.0.1:8000/docs
+🐳 Docker & Deployment
 
-```bash
-# Navigate to the backend directory
-cd backend
+The application includes Docker configuration for containerized deployment.
 
-# Activate the virtual environment
-source venv/bin/activate          # macOS / Linux
-# OR: venv\Scripts\activate       # Windows
+Architecture
+                  Docker Compose
+                       │
+          ┌────────────┼────────────┐
+          │            │            │
+          ▼            ▼            ▼
+     Frontend       Backend       MongoDB
+      React         FastAPI       Database
+Start Services
+docker compose up --build
+Stop Services
+docker compose down
 
-# Install Python dependencies
-pip install -r requirements.txt
+Docker provides a reproducible environment for running the frontend, backend and database together.
+Machine Learning Artifacts
 
-# Train the ML model (only needed once — generates model.pkl)
-cd ml
-python train_model.py
+The repository contains the trained artifacts required by the recommendation and risk workflows.
 
-# Start the FastAPI server
-cd ..
-uvicorn app:app --reload --host 0.0.0.0 --port 8000
-```
+The large crop-yield prediction model is intentionally excluded from normal Git tracking because of its file size.
 
-The API will be live at: **http://localhost:8000**
-Interactive docs: **http://localhost:8000/docs**
+The repository retains the relevant training and inference code so that the model can be reproduced or supplied separately for deployment.
 
-### Step 2: Frontend
+🎯 Project Outcomes
 
-```bash
-# Navigate to the frontend directory
-cd frontend
+YieldSense AI demonstrates an end-to-end integration of:
 
-# Install Node.js dependencies
-npm install
+Full-stack web development
+REST API development
+Machine Learning
+MongoDB database integration
+Real-time weather integration
+Soil intelligence
+Crop recommendation
+Agricultural risk assessment
+Data visualization
+Productivity analytics
+Seasonal reporting
+Authentication
+Role-based access
+Agricultural officer communication
+Docker-based deployment preparation
 
-# Start the Vite development server
-npm run dev
-```
+The platform demonstrates how agricultural data can be transformed into practical decision-support information through an integrated AI-enabled web application.
 
-The app will be live at: **http://localhost:5173**
+🔮 Future Enhancements
 
-### Environment Variables
+Future versions can include:
 
-Create a `.env` file inside the `backend/` folder:
-
-```env
-MONGO_URI=mongodb://localhost:27017/yieldsense
-JWT_SECRET_KEY=your-very-secure-secret-key
-JWT_ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=1440
-ALLOWED_ORIGINS=http://localhost:5173
-```
-
----
-
-## What the Dashboard Shows
-
-The main dashboard is split into two views:
-
-### Dashboard View — Insights & Analytics
-- **4 KPI Cards**: Total Predictions Run, Average Yield (kg/ha), Best Performing Crop, Soil Fertility Status
-- **Bar Chart**: AI Forecast vs Regional Baseline across all 8 crops — both styled with a clean white card design
-- **Soil Health Index Card**: Live SVG donut ring (score/100) + per-nutrient mini cards (N, P, K, pH, Organic Matter) with coloured progress bars
-- **Prediction Log Table**: Searchable, filterable history table with CSV export
-
-### Yield Forecasting View — The Prediction Engine
-- **Input Form**: 9 numerical inputs (area, rainfall, temperature, humidity, soil pH, N, P, K, organic matter) + 4 categorical dropdowns (crop, region, season, soil type, irrigation type)
-- **AI Output Panel**: Predicted yield, total tonnes, productivity score, soil health score, weather impact
-- **Crop Suitability Ranking**: After running a forecast, the system automatically ranks all 8 crops by predicted yield — with horizontal progress bars showing relative suitability %
-
----
-
-## Supported Crops
-
-| Crop | Typical Yield Range | Best Season |
-|---|---|---|
-| **Wheat** | 2,500 – 5,000 kg/ha | Rabi (Winter) |
-| **Rice** | 3,000 – 6,000 kg/ha | Kharif (Monsoon) |
-| **Maize** | 3,500 – 7,000 kg/ha | Kharif / Zaid |
-| **Soybean** | 1,500 – 3,500 kg/ha | Kharif |
-| **Cotton** | 1,200 – 2,500 kg/ha | Kharif |
-| **Barley** | 2,000 – 4,500 kg/ha | Rabi |
-| **Sugarcane** | 50,000 – 90,000 kg/ha | Annual |
-| **Potato** | 15,000 – 40,000 kg/ha | Rabi / Zaid |
-
----
-
-## Key Technical Decisions
-
-**Why FastAPI over Flask/Django?**
-FastAPI gives automatic Pydantic request validation, auto-generated Swagger docs, and native async support — all out of the box. For a data-heavy platform with ML inference, this reduces a lot of boilerplate.
-
-**Why an Ensemble model instead of a single model?**
-A single model tends to overfit to certain patterns. By blending Random Forest (40%) + Extra Trees (40%) + XGBoost (20%), we get the variance reduction of Random Forest, the extreme randomisation of Extra Trees, and the boosting power of XGBoost — resulting in better generalisation on unseen field conditions.
-
-**Why log-transform the target variable?**
-Crop yields have a heavily right-skewed distribution (Sugarcane yields are 10-20x higher than Barley). Training on raw values causes the model to overfit high-yield crops. `log1p()` normalises this, and `expm1()` converts predictions back.
-
-**Why MongoDB with in-memory fallback?**
-MongoDB gives schema flexibility for storing rich prediction objects (nested soil/weather metadata). The in-memory fallback means the system stays fully functional even without a live database connection — useful during development and demos.
-
----
-
-## About This Project
-
-This project was designed and built as a full-stack AI portfolio project demonstrating:
-
-- **End-to-end ML pipeline** — from raw CSV data cleaning to a deployed prediction API
-- **Production-ready architecture** — JWT auth, RBAC, MongoDB, async REST API
-- **Modern frontend engineering** — React + Vite SPA, Recharts visualisations, responsive design
-- **Real agricultural value** — The system addresses a genuine challenge faced by farmers: predicting harvest outcomes before the season begins
-
----
-
-*Built for agricultural intelligence.*
+🛰️ Satellite and remote-sensing integration
+📡 IoT-based soil sensors
+🌿 Crop disease detection using images
+🌦 Advanced weather forecasting
+💧 Smart irrigation recommendations
+🧪 Fertilizer quantity optimization
+🌐 Multilingual farmer support
+📱 Mobile application
+🤖 Agricultural AI chatbot
+🔔 Smart alerts and notifications
+☁️ Cloud-based production deployment
+🔍 Explainable AI
